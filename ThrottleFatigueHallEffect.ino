@@ -37,7 +37,7 @@ void setup() {
 }
 
 void loop() {
-    if (cycles < cycle_set){
+    if (cycles < cycle_set){ // continue if current cycle number is less than set number of cycles
       int pwr = 65;
       int dir = 1;
       setMotor(dir, pwr, PWM, IN1, IN2);
@@ -69,9 +69,9 @@ void setMotor(int dir, int pwmVal, int pwm, int in1, int in2) {
   }
 }
 
-void magnetDetect() {
+void magnetDetect() { // debounce function for preventing false cycle counts as hall sensor transitions between high and low
   unsigned long interruptTime = millis();
-  if (interruptTime - lastInterruptTime >= lockoutTime){
+  if (interruptTime - lastInterruptTime >= lockoutTime){ 
      cycles++;
      lastInterruptTime = millis();
      Serial.println(cycles);
